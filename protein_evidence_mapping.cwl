@@ -27,7 +27,7 @@ outputs:
       sort_gff3/sorted_output
 
 steps:
-  meteuk:
+  metaeuk:
     run: tools/metaeuk_easy_predict.cwl
     in:
       contigs: contigs_fasta
@@ -49,7 +49,7 @@ steps:
   extract_region_specs:
     run: tools/metaeuk_to_regions.cwl
     in:
-      metaeuk_fasta: meteuk/output_fasta
+      metaeuk_fasta: metaeuk/output_fasta
     out:
       - contig_regions_files
       - proteins_lists
