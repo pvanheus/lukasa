@@ -57,6 +57,7 @@ inputs:
 outputs:
     extracted_fasta:
         type: File
+        format: $(inputs.fasta_file.format)
         outputBinding:
             glob: output.fasta
 

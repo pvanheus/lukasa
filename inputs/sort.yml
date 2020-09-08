@@ -1,0 +1,6 @@
+in_file:
+  class: File
+  path: /home/pvh/Documents/code/Masters/protein_evidence_mapping/data/spaln_out.gff3
+key: "4"
+numberic_sort: true
+field_delimiter: "\t"

@@ -14,11 +14,20 @@ inputs:
     format: edam:format_1929
   species_table:
     type: string
+  gff_sort_key:
+    type: string
+    default: "4"
+  gff_sort_numeric:
+    type: boolean
+    default: true
+  gff_sort_delimiter:
+    type: string
+    default: "\t"
 outputs:
   spaln_out:
     type: File
     outputSource:
-      process_spaln_output/combined_spaln_output
+      sort_gff3/sorted_output
 
 steps:
   samtools_index_contigs:
@@ -69,6 +78,8 @@ steps:
       genome_fasta: extract_region_pairs/contig_fasta
       query_fasta: extract_region_pairs/protein_fasta
       species: species_table
+      output_format:
+        default: 0
     out:
       - spaln_out
   process_spaln_output:
@@ -77,6 +88,15 @@ steps:
       spaln_outputs: spaln/spaln_out
     out:
       - combined_spaln_output
+  sort_gff3:
+    run: tools/sort.cwl
+    in:
+      in_file: process_spaln_output/combined_spaln_output
+      key: gff_sort_key
+      field_delimiter: gff_sort_delimiter
+      numeric_sort: gff_sort_numeric
+    out:
+      - sorted_output
 
 $namespaces:
   edam: http://edamontology.org/

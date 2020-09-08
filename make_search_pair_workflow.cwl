@@ -23,10 +23,12 @@ inputs:
 outputs:
   contig_fasta:
     type: File
+    format: $(inputs.all_contig_fasta.format)
     outputSource:
       extract_contig/extracted_fasta
   protein_fasta:
     type: File
+    format: $(inputs.all_protein_fasta.format)
     outputSource:
       extract_protein/extracted_fasta
 
