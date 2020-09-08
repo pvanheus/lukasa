@@ -1,0 +1,18 @@
+contigs_fasta:
+  class: File
+  format: edam:format_1929
+  path: /home/pvh/Documents/code/Masters/protein_evidence_mapping/data/NW_017366533_1.fasta
+proteins_fasta:
+  class: File
+  format: edam:format_1929
+  path: /home/pvh/Documents/code/Masters/protein_evidence_mapping/data/RefSeq_proteins__Cynoglossus_semilaevis.fasta
+metaeuk_output:
+  class: File
+  format: edam:format_1929
+  path: /home/pvh/Documents/code/Masters/protein_evidence_mapping/data/metaeuk_out.fasta
+species_table: cynosemi
+
+$namespaces:
+  edam: http://edamontology.org/
+$schemas:
+  - http://edamontology.org/EDAM_1.18.owl

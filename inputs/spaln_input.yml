@@ -1,0 +1,15 @@
+genome_fasta:
+  class: File
+  format: edam:format_1929
+  path: /home/pvh/Documents/code/Masters/protein_evidence_mapping/data/contig1.fasta
+query_fasta:
+  class: File
+  format: edam:format_1929
+  path: /home/pvh/Documents/code/Masters/protein_evidence_mapping/data/protein1.fasta
+species: cynosemi
+output_format: 0
+
+$namespaces:
+  edam: http://edamontology.org/
+$schemas:
+  - http://edamontology.org/EDAM_1.18.owl

@@ -1,0 +1,13 @@
+type: enum
+name: output_format
+label: The spaln output format to produce
+symbols:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+

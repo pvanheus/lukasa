@@ -1,0 +1,14 @@
+contigs:
+  class: File
+  path: /usr/people/pvh/seabass/NW_017366533_1.fasta
+  format: edam:format_1929
+query:
+  class: File
+  path: /usr/people/pvh/seabass/protein1.fasta
+  format: edam:format_1929
+output_name: test.fasta
+
+$namespaces:
+  edam: http://edamontology.org/
+$schemas:
+  - http://edamontology.org/EDAM_1.18.owl
