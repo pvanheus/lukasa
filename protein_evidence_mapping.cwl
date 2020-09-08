@@ -3,9 +3,6 @@ cwlVersion: v1.0
 class: Workflow
 
 inputs:
-  metaeuk_output:
-    type: File
-    format: edam:format_1929
   contigs_fasta:
     type: File
     format: edam:format_1929
@@ -30,6 +27,13 @@ outputs:
       sort_gff3/sorted_output
 
 steps:
+  meteuk:
+    run: tools/metaeuk_easy_predict.cwl
+    in:
+      contigs: contigs_fasta
+      query: proteins_fasta
+    out:
+      - output_fasta
   samtools_index_contigs:
     run: tools/samtools_faidx.cwl
     in:
@@ -45,7 +49,7 @@ steps:
   extract_region_specs:
     run: tools/metaeuk_to_regions.cwl
     in:
-      metaeuk_fasta: metaeuk_output
+      metaeuk_fasta: meteuk/output_fasta
     out:
       - contig_regions_files
       - proteins_lists

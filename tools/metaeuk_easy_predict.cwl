@@ -24,6 +24,7 @@ inputs:
       position: 20
   output_name:
     type: string
+    default: "metaeuk_output.fasta"
     inputBinding:
       position: 30
   temp_dir:
@@ -72,6 +73,7 @@ baseCommand: [ metaeuk, easy-predict ]
 outputs:
   output_fasta:
     type: File
+    format: $(inputs.contigs.format)
     outputBinding:
       glob: $(inputs.output_name)
 
