@@ -11,15 +11,6 @@ inputs:
     format: edam:format_1929
   species_table:
     type: string
-  gff_sort_key:
-    type: string
-    default: "4"
-  gff_sort_numeric:
-    type: boolean
-    default: true
-  gff_sort_delimiter:
-    type: string
-    default: "\t"
 outputs:
   spaln_out:
     type: File
@@ -96,9 +87,12 @@ steps:
     run: tools/sort.cwl
     in:
       in_file: process_spaln_output/combined_spaln_output
-      key: gff_sort_key
-      field_delimiter: gff_sort_delimiter
-      numeric_sort: gff_sort_numeric
+      key: 
+        default: "4"
+      field_delimiter:
+        default: "\t"
+      numeric_sort:
+        default: true
     out:
       - sorted_output
 
