@@ -7,3 +7,7 @@ An example workflow input file in in [inputs/workflow1_inputs.yml](inputs/workfl
 `cwltool --parallel protein_evidence_mapping.cwl inputs/workflow1_inputs.yml`
 
 This finds 88 mappings between the 39070 RefSeq proteins and the approximately 2.5 MB contig and runs the region extraction and spaln steps using the (experimental) parallel job support of cwltool.
+
+The diagram below shows the workflow logic (drawn using [cwlviewer](https://view.commonwl.org/)).
+
+![Image of workflow logic](images/cwlviewer_protein_evidence_mapping.png)
