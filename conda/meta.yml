@@ -1,0 +1,35 @@
+{% set name = "protein_evidence_mapping" %}
+{% set version = "0.0.1" %}
+{% set sha256 = "371f1aa951ae80298af274d204f7157a8c02fb3ea9c1c56373ce7e32a77b3e36" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/pvanheus/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: {{ sha256 }}
+
+build:
+  number: 0
+
+requirements:
+  host:
+    - cwltool
+  run:
+    - cwltool
+    - metaeuk
+    - python
+    - spaln
+    - samtools
+
+test:
+  commands:
+    - pem.py --help
+
+about:
+  home: https://github.com/pvanheus/protein_evidence_mapping
+  license: GPL-3.0
+  license_family: GPL
+  license_file: LICENSE
+  summary: "Map proteins against a genomic contig"
