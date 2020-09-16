@@ -83,18 +83,6 @@ steps:
       spaln_outputs: spaln/spaln_out
     out:
       - combined_spaln_output
-  # sort_gff3:
-  #   run: tools/sort.cwl
-  #   in:
-  #     in_file: process_spaln_output/combined_spaln_output
-  #     key: 
-  #       default: "4"
-  #     field_delimiter:
-  #       default: "\t"
-  #     numeric_sort:
-  #       default: true
-  #   out:
-  #     - sorted_output
 
 $namespaces:
   edam: http://edamontology.org/
