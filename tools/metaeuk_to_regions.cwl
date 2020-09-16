@@ -10,7 +10,9 @@ hints:
   SoftwareRequirement:
     packages: 
       - package: python
-
+  DockerRequirement:
+    dockerPull: python:3.8-slim-buster
+    
 requirements:
   InitialWorkDirRequirement:
     listing:

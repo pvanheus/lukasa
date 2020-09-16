@@ -7,6 +7,8 @@ hints:
       - package: sort
         specs:
           - "https://packages.debian.org/coreutils"
+  DockerRequirement:
+    dockerPull: alpine
 
 inputs:
   in_file:
@@ -17,17 +19,17 @@ inputs:
     type: string?
     inputBinding:
       position: 1
-      prefix: --key
+      prefix: -k
   numeric_sort:
     type: boolean?
     inputBinding:
       position: 1
-      prefix: --numeric-sort
+      prefix: -n
   field_delimiter:
     type: string?
     inputBinding:
       position: 1
-      prefix: --field-separator
+      prefix: -t
 
 stdout: sorted_output.txt
 
