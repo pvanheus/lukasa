@@ -1,4 +1,4 @@
-### A CWL workflow for protein evidence mapping
+### Lukasa: A CWL workflow for protein evidence mapping
 
 The workflow in [protein_evidence_mapping.cwl](protein_evidence_mapping.cwl) uses [metaeuk](https://github.com/soedinglab/metaeuk) to find regions of overlap between proteins and a genomic contig, then uses `samtools faidx` to extract those regions and [spaln](https://github.com/ogotoh/spaln) to refine the alignment between the proteins and the genome.
 
@@ -11,3 +11,7 @@ This finds 88 mappings between the 39070 RefSeq proteins and the approximately 2
 The diagram below shows the workflow logic (drawn using [cwlviewer](https://view.commonwl.org/)).
 
 ![Image of workflow logic](images/cwlviewer_protein_evidence_mapping.png)
+
+#### Lukasa: the name
+
+_Lukasa_ are mnemonic devices or maps which record the history of the Luba people of what is now the Democratic Republic of Congo. These shell and bead adorned boards help organise the memory or histories that are important to the Luba.
