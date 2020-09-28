@@ -26,13 +26,13 @@ steps:
     out:
       - output_fasta
   samtools_index_contigs:
-    run: tools/samtools_faidx.cwl
+    run: bio-cwl-tools:samtools/samtools_faidx.cwl
     in:
       sequences: contigs_fasta
     out:
       - sequences_with_index
   samtools_index_protein:
-    run: tools/samtools_faidx.cwl
+    run: bio-cwl-tools:samtools/samtools_faidx.cwl
     in:
       sequences: proteins_fasta
     out:
@@ -86,5 +86,6 @@ steps:
 
 $namespaces:
   edam: http://edamontology.org/
+  bio-cwl-tools: https://raw.githubusercontent.com/common-workflow-library/bio-cwl-tools/release/
 $schemas:
   - http://edamontology.org/EDAM_1.18.owl
