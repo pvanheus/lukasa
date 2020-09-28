@@ -3,6 +3,7 @@
 import argparse
 import json
 import os
+from os.path import abspath
 import subprocess
 import sys
 import tempfile
@@ -41,8 +42,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="Wrapper to simplify running the lukasa protein evidence mapping workflow on the command line"
     )
-    parser.add_argument("--output_filename", default=cwl_workflow_dir)
-    parser.add_argument("--workflow_dir", default=os.environ.get("PREFIX"))
+    parser.add_argument("--output_filename", default='spaln_out.gff3')
+    parser.add_argument("--workflow_dir", default=cwl_workflow_dir)
     parser.add_argument("contigs_filename", help="File with genomic contigs")
     parser.add_argument("proteins_filename", help="File with proteins to map")
     parser.add_argument("species_table", help="spaln species table to use")
@@ -53,7 +54,7 @@ if __name__ == "__main__":
     cwl_input_file = tempfile.NamedTemporaryFile(delete=False, mode="w")
     cwl_input_file.write(
         template.format(
-            args.contigs_filename, args.proteins_filename, args.species_table
+            abspath(args.contigs_filename), abspath(args.proteins_filename), args.species_table
         )
     )
     cwl_input_file.close()
