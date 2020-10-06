@@ -89,3 +89,4 @@ $namespaces:
   bio-cwl-tools: https://raw.githubusercontent.com/common-workflow-library/bio-cwl-tools/release/
 $schemas:
   - http://edamontology.org/EDAM_1.18.owl
+
