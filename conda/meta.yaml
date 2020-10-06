@@ -1,6 +1,6 @@
 {% set name = "lukasa" %}
-{% set version = "0.0.2" %}
-{% set sha256 = "9088506cd112644dabc70048bcf4b41a79c32502deab72dc5b2db56c616c9267" %}
+{% set version = "0.0.3" %}
+{% set sha256 = "fcd72b5e8b931826f31981feac74c797fa8f397b94388ce746fe10ce2b1656ac" %}
 
 package:
   name: {{ name|lower }}
@@ -12,6 +12,7 @@ source:
 
 build:
   number: 0
+  no-arch: python
 
 requirements:
   host:
