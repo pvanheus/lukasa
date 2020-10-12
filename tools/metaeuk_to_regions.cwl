@@ -34,7 +34,7 @@ inputs:
     inputBinding:
       position: 3
 
-baseCommand: [ python, extract_regions.py ]
+baseCommand: [ python ]
 
 outputs:
   contig_regions_files:
