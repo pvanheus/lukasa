@@ -13,24 +13,26 @@ hints:
   DockerRequirement:
     dockerPull: python:3.8-slim-buster
     
-requirements:
-  InitialWorkDirRequirement:
-    listing:
-      - entryname: extract_regions.py
-        entry:
-          $include: "extract_regions.py"
-        
 inputs:
+  scripts:
+    type: File
+    default:
+      class: File
+      basename: "extract_regions.py"
+      contents:
+        $include: "extract_regions.py"
+    inputBinding:
+      position: 1
   metaeuk_fasta:
     type: File
     format: edam:format_1929
     inputBinding:
-      position: 1
+      position: 2
   fuzz_length:
     type: int?
     doc: number of bases to add to the start and end of the region to extract
     inputBinding:
-      position: 2
+      position: 3
 
 baseCommand: [ python, extract_regions.py ]
 

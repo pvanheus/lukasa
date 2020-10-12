@@ -9,18 +9,20 @@ hints:
   DockerRequirement:
     dockerPull: python:3.8-slim-buster
 
-requirements:
-  InitialWorkDirRequirement:
-    listing:
-      - entryname: process_spaln_output.py
-        entry: 
-          $include: "process_spaln_output.py"
-
 inputs:
+  script:
+    type: File
+    default:
+      class: File
+      basename: "process_spaln_output.py"
+      contents:
+        $include: "process_spaln_output.py"
+    inputBinding:
+      position: 1
   spaln_outputs:
     type: File[]
     inputBinding:
-      position: 1
+      position: 2
 
 outputs:
   combined_spaln_output:
@@ -28,7 +30,7 @@ outputs:
     outputBinding:
       glob: spaln_out.gff3
 
-baseCommand: [ python, process_spaln_output.py ]
+baseCommand: [ python ]
 
 $namespaces:
   edam: http://edamontology.org/
