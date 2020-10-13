@@ -10,7 +10,7 @@ inputs:
     type: File
     format: edam:format_1929
   species_table:
-    type: string
+    type: string?
 outputs:
   spaln_out:
     type: File

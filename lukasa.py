@@ -16,7 +16,7 @@ proteins_fasta:
   class: File
   format: edam:format_1929
   path: {}
-species_table: {}
+{}
 
 $namespaces:
   edam: http://edamontology.org/
@@ -46,15 +46,19 @@ if __name__ == "__main__":
     parser.add_argument("--workflow_dir", default=cwl_workflow_dir)
     parser.add_argument("contigs_filename", help="File with genomic contigs")
     parser.add_argument("proteins_filename", help="File with proteins to map")
-    parser.add_argument("species_table", help="spaln species table to use")
+    parser.add_argument("--species_table", help="spaln species table to use")
     args = parser.parse_args()
     if not is_fasta(args.contigs_filename) or not is_fasta(args.proteins_filename):
         sys.exit("Error: Input files must be in FASTA format")
 
     cwl_input_file = tempfile.NamedTemporaryFile(delete=False, mode="w")
+    if args.species_table is not None:
+        species_table_string = 'species_table: {}'.format(args.species_table)
+    else:
+        species_table_string = ''
     cwl_input_file.write(
         template.format(
-            abspath(args.contigs_filename), abspath(args.proteins_filename), args.species_table
+            abspath(args.contigs_filename), abspath(args.proteins_filename), species_table_string
         )
     )
     cwl_input_file.close()

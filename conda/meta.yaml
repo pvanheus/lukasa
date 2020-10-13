@@ -36,5 +36,5 @@ about:
   summary: "Fast and accurate mapping of proteins against eukaryotic genomes"
   description: |
     Lukasa combines MetaEUK and spaln to rapidly identify matches between proteins and genomic contigs and
-    accurately map the proteins to the identified regions. The output is GFF3, suitable for use in 
+    accurately align the proteins to the identified regions. The output is GFF3 format, suitable for use in 
     eukaryotic genome annotation.
