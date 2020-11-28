@@ -1,0 +1,53 @@
+<tool id="lukasa" name="Lukasa" version="@TOOL_VERSION@+galaxy0" python_template_version="3.5">
+    <description>Align protein evidence against genomic contigs using metaeuk and spaln</description>
+    <macros>
+        <token name="@TOOL_VERSION@">0.0.6</token>
+        <!-- note that this DOI is for lukasa 0.0.6 - update as needed -->
+        <token name="@DOI@">10.5281/zenodo.4084863</token> 
+    </macros>
+    <requirements>
+        <requirement type="package" version="@TOOL_VERSION@">lukasa</requirement>
+    </requirements>
+    <command detect_errors="exit_code"><![CDATA[
+        lukasa.py
+        #if str($species_table).strip() != ''
+            --species_table '$species_table'
+        #end if
+            --output_filename '$output_gff' '$contigs_fasta' '$proteins_fasta'
+    ]]></command>
+    <inputs>
+        <param name='contigs_fasta' type='data' format='fasta' label='Genomic contigs (FASTA)' />
+        <param name='proteins_fasta' type='data' format='fasta' label='Proteins (FASTA)' />
+        <param name='species_table' type='text' label='Spaln species table to use (optional)' />
+    </inputs>
+    <outputs>
+        <data name="output_gff" format='gff3' label='Map proteins to genome ${on_string}' />
+    </outputs>
+    <tests>
+        <test>
+            <param name="contigs_fasta" ftype="fasta" value="contig.fasta" />
+            <param name="proteins_fasta" ftype="fasta" value="proteins.fasta" />
+            <param name="species_table" value="cynosemi" />
+            <output name="output_gff" value="spaln_out.gff3" />
+        </test>
+        <test>
+            <param name="contigs_fasta" ftype="fasta" value="contig.fasta" />
+            <param name="proteins_fasta" ftype="fasta" value="proteins.fasta" />
+            <output name="output_gff" value="spaln_out_no_st.gff3" />
+        </test>
+    </tests>
+    <help><![CDATA[
+    Lukasa combines MetaEUK and spaln to rapidly identify matches between proteins and genomic contigs and
+    accurately align the proteins to the identified regions. The output is GFF3 format, suitable for use in 
+    eukaryotic genome annotation.
+
+    The 'species table' parameter is the name of a species parameter table for spaln. A suitable species
+    table can be found either by examining the spaln gnm2tab_ file or using the list_spaln_tables tool (installed 
+    along with the Galaxy spaln tool). While this parameter is optional it is recommended.
+
+    .. _gnm2tab: https://github.com/ogotoh/spaln/blob/master/table/gnm2tab
+    ]]></help>
+    <citations>
+        <citation type="doi">@DOI@</citation>
+    </citations>
+</tool>
