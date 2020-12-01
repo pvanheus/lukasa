@@ -11,6 +11,9 @@ hints:
   DockerRequirement:
     dockerPull: quay.io/biocontainers/metaeuk:2.ddf2742--h2d02072_0
 
+requirements:
+  InlineJavascriptRequirement: {}
+
 inputs:
   contigs:
     type: File
@@ -29,8 +32,9 @@ inputs:
       position: 30
   temp_dir:
     type: string
-    default: $(runtime.tmpdir)
+    default: ""
     inputBinding:
+      valueFrom: "$(self ? self : runtime.tmpdir)"
       position: 40
   threads:
     type: int?
