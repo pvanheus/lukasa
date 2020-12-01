@@ -4,18 +4,25 @@ class: Workflow
 
 inputs:
   contigs_fasta:
+    label: "Genomic contigs (FASTA)"
     type: File
     format: edam:format_1929
   proteins_fasta:
+    label: "Proteins (FASTA)"
     type: File
     format: edam:format_1929
   species_table:
+    label: "Spaln species table to use (optional)"
     type: string?
 outputs:
   spaln_out:
     type: File
     outputSource:
       process_spaln_output/combined_spaln_output
+requirements:
+  ResourceRequirement:
+    ramMin: 4096
+    coresMin: 1
 
 steps:
   metaeuk:
