@@ -39,16 +39,17 @@ baseCommand: [ python ]
 outputs:
   contig_regions_files:
     type: File[]
-    format: edam:format_1964
+    format: iana:text/plain
     outputBinding:
       glob: contig_regions*.txt
   proteins_lists:
     type: File[]
-    format: edam:format_1964
+    format: iana:text/plain
     outputBinding:
       glob: proteins*.txt
 
 $namespaces:
   edam: http://edamontology.org/
+  iana: https://www.iana.org/assignments/media-types/
 $schemas:
   - http://edamontology.org/EDAM_1.18.owl

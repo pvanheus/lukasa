@@ -25,7 +25,7 @@ inputs:
             position: 10
     region_file:
         type: File
-        format: edam:format_1964
+        format: iana:text/plain
         inputBinding:
             position: 1
             prefix: --region-file
@@ -70,5 +70,6 @@ baseCommand: [ samtools, faidx ]
 
 $namespaces:
   edam: http://edamontology.org/
+  iana: https://www.iana.org/assignments/media-types/
 $schemas:
   - http://edamontology.org/EDAM_1.18.owl

@@ -15,10 +15,10 @@ inputs:
     format: edam:format_1929
   contig_region:
     type: File
-    format: edam:format_1964
+    format: iana:text/plain
   protein:
     type: File
-    format: edam:format_1964
+    format: iana:text/plain
 
 outputs:
   contig_fasta:
@@ -50,5 +50,6 @@ steps:
 
 $namespaces:
   edam: http://edamontology.org/
+  iana: https://www.iana.org/assignments/media-types/
 $schemas:
   - http://edamontology.org/EDAM_1.18.owl
