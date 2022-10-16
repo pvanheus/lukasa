@@ -1,39 +1,50 @@
 #!/usr/bin/env cwl-runner
 cwlVersion: v1.0
 class: CommandLineTool
+$namespaces:
+  edam: http://edamontology.org/
 
-hints:
-  DockerRequirement:
-    dockerPull: quay.io/biocontainers/samtools:1.2-0
 requirements:
+  SoftwareRequirement
+    packages:
+    - package: samtools
+      specs:
+      - https://bio.tools/samtools
+      version:
+      - 1.16.1    
+  DockerRequirement:
+    dockerPull: quay.io/biocontainers/samtools:1.16.1--h6899075_1
   InitialWorkDirRequirement:
-    listing: [ $(inputs.sequences) ]
-
-baseCommand: [ samtools, faidx ]
+    listing:
+    - $(inputs.sequences)
 
 inputs:
   sequences:
-    type: File
     doc: Input FASTA file
+    type: File
     format: edam:format_1929
 
-arguments:
-   - $(inputs.sequences.basename)
-
 outputs:
-  sequences_with_index:
-    type: File
-    format: $(inputs.sequences.format)
-    secondaryFiles:
-     - .fai
-    outputBinding:
-      glob: $(inputs.sequences.basename)
   sequences_index:
     type: File
     outputBinding:
       glob: $(inputs.sequences.basename).fai
+  sequences_with_index:
+    type: File
+    format: $(inputs.sequences.format)
+    secondaryFiles:
+    - .fai
+    outputBinding:
+      glob: $(inputs.sequences.basename)
 
-$namespaces:
-  edam: http://edamontology.org/
+baseCommand:
+- samtools
+- faidx
+arguments:
+- $(inputs.sequences.basename)
+
+hints:
+  DockerRequirement:
+    dockerPull: quay.io/biocontainers/samtools:1.16.1--h6899075_1
 $schemas:
-  - http://edamontology.org/EDAM_1.18.owl
+- http://edamontology.org/EDAM_1.18.owl

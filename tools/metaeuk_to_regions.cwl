@@ -1,40 +1,30 @@
 #!/usr/bin/env cwl-runner
 cwlVersion: v1.0
 class: CommandLineTool
+$namespaces:
+  edam: http://edamontology.org/
+  iana: https://www.iana.org/assignments/media-types/
 
-# EDAM formats:
-# format_1929 - FASTA
-# format_1964 - plain text
-
-hints:
-  SoftwareRequirement:
-    packages: 
-      - package: python
-  DockerRequirement:
-    dockerPull: python:3.8-slim-buster
-    
 inputs:
-  scripts:
-    type: File
-    default:
-      class: File
-      basename: "extract_regions.py"
-      contents:
-        $include: "extract_regions.py"
+  fuzz_length:
+    doc: number of bases to add to the start and end of the region to extract
+    type: int?
     inputBinding:
-      position: 1
+      position: 3
   metaeuk_fasta:
     type: File
     format: edam:format_1929
     inputBinding:
       position: 2
-  fuzz_length:
-    type: int?
-    doc: number of bases to add to the start and end of the region to extract
+  scripts:
+    type: File
+    default:
+      class: File
+      basename: extract_regions.py
+      contents:
+        $include: extract_regions.py
     inputBinding:
-      position: 3
-
-baseCommand: [ python ]
+      position: 1
 
 outputs:
   contig_regions_files:
@@ -48,8 +38,14 @@ outputs:
     outputBinding:
       glob: proteins*.txt
 
-$namespaces:
-  edam: http://edamontology.org/
-  iana: https://www.iana.org/assignments/media-types/
+baseCommand:
+- python
+
+hints:
+  DockerRequirement:
+    dockerPull: python:3.10-slim-buster
+  SoftwareRequirement:
+    packages:
+    - package: python
 $schemas:
-  - http://edamontology.org/EDAM_1.18.owl
+- http://edamontology.org/EDAM_1.18.owl

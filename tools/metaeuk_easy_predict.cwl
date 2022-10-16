@@ -1,15 +1,8 @@
 #!/usr/bin/env cwl-runner
 cwlVersion: v1.0
 class: CommandLineTool
-
-hints:
-  SoftwareRequirement:
-    packages:
-      metaeuk:
-        version: [ "2.ddf2742" ]
-        specs: [ "https://github.com/soedinglab/metaeuk" ]
-  DockerRequirement:
-    dockerPull: quay.io/biocontainers/metaeuk:2.ddf2742--h2d02072_0
+$namespaces:
+  edam: http://edamontology.org/
 
 requirements:
   InlineJavascriptRequirement: {}
@@ -20,59 +13,57 @@ inputs:
     format: edam:format_1929
     inputBinding:
       position: 10
+  eval:
+    type: float?
+    inputBinding:
+      prefix: --metaeuk-eval
+      position: 1
+  max_intron:
+    type: float?
+    inputBinding:
+      prefix: --max-intron
+      position: 1
+  min_coverage:
+    type: float?
+    inputBinding:
+      prefix: --metaeuk-tcov
+      position: 1
+  min_intron:
+    type: float?
+    inputBinding:
+      prefix: --min-intron
+      position: 1
+  min_length:
+    type: int?
+    inputBinding:
+      prefix: --min-length
+      position: 1
+  output_name:
+    type: string
+    default: metaeuk_output.fasta
+    inputBinding:
+      position: 30
   query:
     type: File
     format: edam:format_1929
     inputBinding:
       position: 20
-  output_name:
-    type: string
-    default: "metaeuk_output.fasta"
-    inputBinding:
-      position: 30
-  temp_dir:
-    type: string
-    default: ""
-    inputBinding:
-      valueFrom: "$(self ? self : runtime.tmpdir)"
-      position: 40
-  threads:
-    type: int?
-    inputBinding:
-      position: 1
-      prefix: --threads
-  min_length:
-    type: int?
-    inputBinding:
-      position: 1
-      prefix: --min-length
   segment_eval:
     type: float?
     inputBinding:
-      position: 1
       prefix: -e
-  eval:
-    type: float?
-    inputBinding:
       position: 1
-      prefix: --metaeuk-eval
-  min_coverage:
-    type: float?
+  temp_dir:
+    type: string
+    default: ''
     inputBinding:
-      position: 1
-      prefix: --metaeuk-tcov
-  max_intron:
-    type: float?
+      position: 40
+      valueFrom: '$(self ? self : runtime.tmpdir)'
+  threads:
+    type: int?
     inputBinding:
+      prefix: --threads
       position: 1
-      prefix: --max-intron
-  min_intron:
-    type: float?
-    inputBinding:
-      position: 1
-      prefix: --min-intron
-
-baseCommand: [ metaeuk, easy-predict ]
 
 outputs:
   output_fasta:
@@ -81,7 +72,19 @@ outputs:
     outputBinding:
       glob: $(inputs.output_name)
 
-$namespaces:
-  edam: http://edamontology.org/
+baseCommand:
+- metaeuk
+- easy-predict
+
+hints:
+  DockerRequirement:
+    dockerPull: quay.io/biocontainers/metaeuk:6.a5d39d9--pl5321hf1761c0_1
+  SoftwareRequirement:
+    packages:
+      metaeuk:
+        specs:
+        - https://github.com/soedinglab/metaeuk
+        version:
+        - 6.a5d39d9--pl5321hf1761c0_1
 $schemas:
-  - http://edamontology.org/EDAM_1.18.owl
+- http://edamontology.org/EDAM_1.18.owl

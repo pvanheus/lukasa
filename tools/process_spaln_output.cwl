@@ -1,22 +1,17 @@
 #!/usr/bin/env cwl-runner
 cwlVersion: v1.0
 class: CommandLineTool
-
-hints:
-  SoftwareRequirement:
-    packages:
-      - package: python
-  DockerRequirement:
-    dockerPull: python:3.8-slim-buster
+$namespaces:
+  edam: http://edamontology.org/
 
 inputs:
   script:
     type: File
     default:
       class: File
-      basename: "process_spaln_output.py"
+      basename: process_spaln_output.py
       contents:
-        $include: "process_spaln_output.py"
+        $include: process_spaln_output.py
     inputBinding:
       position: 1
   spaln_outputs:
@@ -30,9 +25,14 @@ outputs:
     outputBinding:
       glob: spaln_out.gff3
 
-baseCommand: [ python ]
+baseCommand:
+- python
 
-$namespaces:
-  edam: http://edamontology.org/
+hints:
+  DockerRequirement:
+    dockerPull: python:3.10-slim-buster
+  SoftwareRequirement:
+    packages:
+    - package: python
 $schemas:
-  - http://edamontology.org/EDAM_1.18.owl
+- http://edamontology.org/EDAM_1.18.owl

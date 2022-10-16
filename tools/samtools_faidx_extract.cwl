@@ -1,75 +1,73 @@
 #!/usr/bin/env cwl-runner
 cwlVersion: v1.0
 class: CommandLineTool
-
-# EDAM formats:
-# format_1929 - FASTA
-# format_1964 - plain text
-
-hints:
-  SoftwareRequirement:
-    packages: 
-      - package: samtools
-        version: [ "1.10" ]
-        specs: [ "https://bio.tools/samtools" ]
-  DockerRequirement:
-    dockerPull: quay.io/biocontainers/samtools:1.10--h2e538c0_3 
-
-inputs:
-    fasta_file:
-        type: File
-        format: edam:format_1929
-        secondaryFiles:
-            - .fai
-        inputBinding:
-            position: 10
-    region_file:
-        type: File
-        format: iana:text/plain
-        inputBinding:
-            position: 1
-            prefix: --region-file
-    line_length:
-        type: int?
-        doc: "Length of FASTA sequence line"
-        inputBinding:
-            position: 1
-            prefix: --length
-    continue:
-        type: boolean?
-        doc: "Continue after trying to retrieve missing region"
-        inputBinding:
-            position: 1
-            prefix: --continue
-    reverse_complement:
-        type: boolean?
-        doc: "Reverse complement sequences"
-        inputBinding:
-            position: 1
-            prefix: --reverse-complement
-    strand_mark:
-        type: string?
-        doc: "How to add strand indicator to sequence name"
-        inputBinding:
-            position: 1
-            prefix: --mark-strand
-
-outputs:
-    extracted_fasta:
-        type: File
-        format: $(inputs.fasta_file.format)
-        outputBinding:
-            glob: output.fasta
-
-arguments:
-    - valueFrom: "output.fasta"
-      prefix: --output
-      position: 1
-
-baseCommand: [ samtools, faidx ]
-
 $namespaces:
   edam: http://edamontology.org/
   iana: https://www.iana.org/assignments/media-types/
+
+inputs:
+  continue:
+    doc: Continue after trying to retrieve missing region
+    type: boolean?
+    inputBinding:
+      prefix: --continue
+      position: 1
+  fasta_file:
+    type: File
+    format: edam:format_1929
+    secondaryFiles:
+    - .fai
+    inputBinding:
+      position: 10
+  line_length:
+    doc: Length of FASTA sequence line
+    type: int?
+    inputBinding:
+      prefix: --length
+      position: 1
+  region_file:
+    type: File
+    format: iana:text/plain
+    inputBinding:
+      prefix: --region-file
+      position: 1
+  reverse_complement:
+    doc: Reverse complement sequences
+    type: boolean?
+    inputBinding:
+      prefix: --reverse-complement
+      position: 1
+  strand_mark:
+    doc: How to add strand indicator to sequence name
+    type: string?
+    inputBinding:
+      prefix: --mark-strand
+      position: 1
+
+outputs:
+  extracted_fasta:
+    type: File
+    format: $(inputs.fasta_file.format)
+    outputBinding:
+      glob: output.fasta
+
+baseCommand:
+- samtools
+- faidx
+arguments:
+- prefix: --output
+  position: 1
+  valueFrom: output.fasta
+
+hints:
+  DockerRequirement:
+    dockerPull: quay.io/biocontainers/samtools:1.16.1--h6899075_1
+  SoftwareRequirement:
+    packages:
+    - package: samtools
+      specs:
+      - https://bio.tools/samtools
+      version:
+      - 1.16.1
 $schemas:
-  - http://edamontology.org/EDAM_1.18.owl
+- http://edamontology.org/EDAM_1.18.owl

@@ -1,9 +1,9 @@
 <tool id="lukasa" name="Lukasa" version="@TOOL_VERSION@+galaxy0" python_template_version="3.5">
     <description>Align protein evidence against genomic contigs using metaeuk and spaln</description>
     <macros>
-        <token name="@TOOL_VERSION@">0.0.6</token>
+        <token name="@TOOL_VERSION@">0.0.8</token>
         <!-- note that this DOI is for lukasa 0.0.6 - update as needed -->
-        <token name="@DOI@">10.5281/zenodo.4084863</token> 
+        <token name="@DOI@">10.5281/zenodo.4084863</token>
     </macros>
     <requirements>
         <requirement type="package" version="@TOOL_VERSION@">lukasa</requirement>
@@ -16,24 +16,24 @@
             --output_filename '$output_gff' '$contigs_fasta' '$proteins_fasta'
     ]]></command>
     <inputs>
-        <param name='contigs_fasta' type='data' format='fasta' label='Genomic contigs (FASTA)' />
-        <param name='proteins_fasta' type='data' format='fasta' label='Proteins (FASTA)' />
-        <param name='species_table' type='text' label='Spaln species table to use (optional)' />
+        <param name="contigs_fasta" type="data" format="fasta" label="Genomic contigs (FASTA)"/>
+        <param name="proteins_fasta" type="data" format="fasta" label="Proteins (FASTA)"/>
+        <param name="species_table" type="text" label="Spaln species table to use (optional)"/>
     </inputs>
     <outputs>
-        <data name="output_gff" format='gff3' label='Map proteins to genome ${on_string}' />
+        <data name="output_gff" format="gff3" label="Map proteins to genome ${on_string}"/>
     </outputs>
     <tests>
         <test>
-            <param name="contigs_fasta" ftype="fasta" value="contig.fasta" />
-            <param name="proteins_fasta" ftype="fasta" value="proteins.fasta" />
-            <param name="species_table" value="cynosemi" />
-            <output name="output_gff" value="spaln_out.gff3" />
+            <param name="contigs_fasta" ftype="fasta" value="contig.fasta"/>
+            <param name="proteins_fasta" ftype="fasta" value="proteins.fasta"/>
+            <param name="species_table" value="cynosemi"/>
+            <output name="output_gff" value="spaln_out.gff3"/>
         </test>
         <test>
-            <param name="contigs_fasta" ftype="fasta" value="contig.fasta" />
-            <param name="proteins_fasta" ftype="fasta" value="proteins.fasta" />
-            <output name="output_gff" value="spaln_out_no_st.gff3" />
+            <param name="contigs_fasta" ftype="fasta" value="contig.fasta"/>
+            <param name="proteins_fasta" ftype="fasta" value="proteins.fasta"/>
+            <output name="output_gff" value="spaln_out_no_st.gff3"/>
         </test>
     </tests>
     <help><![CDATA[
