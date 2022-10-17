@@ -3,7 +3,7 @@
     <macros>
         <token name="@TOOL_VERSION@">0.10.0</token>
         <!-- note that this DOI is for lukasa 0.0.6 - update as needed -->
-        <token name="@DOI@">10.5281/zenodo.4084863</token>
+        <token name="@DOI@">10.5281/zenodo.7214490</token>
     </macros>
     <requirements>
         <requirement type="package" version="@TOOL_VERSION@">lukasa</requirement>
