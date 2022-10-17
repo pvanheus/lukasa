@@ -2,7 +2,7 @@
 cwlVersion: v1.0
 class: CommandLineTool
 $namespaces:
-  edam: http://edamontology.org/
+  edam: https://edamontology.org/
 
 requirements:
   SoftwareRequirement
@@ -47,4 +47,4 @@ hints:
   DockerRequirement:
     dockerPull: quay.io/biocontainers/samtools:1.16.1--h6899075_1
 $schemas:
-- http://edamontology.org/EDAM_1.18.owl
+- https://edamontology.org/EDAM_1.18.owl

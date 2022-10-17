@@ -2,7 +2,7 @@
 cwlVersion: v1.0
 class: CommandLineTool
 $namespaces:
-  edam: http://edamontology.org/
+  edam: https://edamontology.org/
 
 inputs:
   genome_fasta:
@@ -45,4 +45,4 @@ hints:
       version:
       - 2.4.13
 $schemas:
-- http://edamontology.org/EDAM_1.18.owl
+- https://edamontology.org/EDAM_1.18.owl

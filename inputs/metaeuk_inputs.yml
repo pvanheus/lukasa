@@ -1,10 +1,10 @@
 contigs:
   class: File
-  path: /usr/people/pvh/seabass/NW_017366533_1.fasta
+  path: /home/pvh/Documents/code/Masters/protein_evidence_mapping/data/NW_017366533_1.fasta
   format: edam:format_1929
 query:
   class: File
-  path: /usr/people/pvh/seabass/protein1.fasta
+  path: /home/pvh/Documents/code/Masters/protein_evidence_mapping/data/RefSeq_proteins__Cynoglossus_semilaevis.fasta
   format: edam:format_1929
 output_name: test.fasta
 

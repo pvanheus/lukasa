@@ -92,8 +92,8 @@ steps:
       - combined_spaln_output
 
 $namespaces:
-  edam: http://edamontology.org/
+  edam: https://edamontology.org/
   bio-cwl-tools: https://raw.githubusercontent.com/common-workflow-library/bio-cwl-tools/release/
 $schemas:
-  - http://edamontology.org/EDAM_1.18.owl
+  - https://edamontology.org/EDAM_1.18.owl
 

@@ -2,7 +2,7 @@
 cwlVersion: v1.0
 class: CommandLineTool
 $namespaces:
-  edam: http://edamontology.org/
+  edam: https://edamontology.org/
 
 requirements:
   InlineJavascriptRequirement: {}
@@ -70,7 +70,7 @@ outputs:
     type: File
     format: $(inputs.contigs.format)
     outputBinding:
-      glob: $(inputs.output_name)
+      glob: $(inputs.output_name).fas
 
 baseCommand:
 - metaeuk
@@ -87,4 +87,4 @@ hints:
         version:
         - 6.a5d39d9--pl5321hf1761c0_1
 $schemas:
-- http://edamontology.org/EDAM_1.18.owl
+- https://edamontology.org/EDAM_1.18.owl
