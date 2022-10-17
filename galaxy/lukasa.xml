@@ -1,7 +1,7 @@
 <tool id="lukasa" name="Lukasa" version="@TOOL_VERSION@+galaxy0" python_template_version="3.5">
     <description>Align protein evidence against genomic contigs using metaeuk and spaln</description>
     <macros>
-        <token name="@TOOL_VERSION@">0.0.8</token>
+        <token name="@TOOL_VERSION@">0.10.0</token>
         <!-- note that this DOI is for lukasa 0.0.6 - update as needed -->
         <token name="@DOI@">10.5281/zenodo.4084863</token>
     </macros>
