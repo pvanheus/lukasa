@@ -8,7 +8,7 @@ region_file:
   path: /home/pvh/Documents/code/Masters/protein_evidence_mapping/data/proteins1.txt
 
 $namespaces:
-  edam: https://edamontology.org/
+  edam: http://edamontology.org/
   iana: https://www.iana.org/assignments/media-types/
 $schemas:
-  - https://edamontology.org/EDAM_1.18.owl
+  - http://edamontology.org/EDAM_1.18.owl

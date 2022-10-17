@@ -2,7 +2,7 @@
 cwlVersion: v1.0
 class: Workflow
 $namespaces:
-  edam: https://edamontology.org/
+  edam: http://edamontology.org/
   iana: https://www.iana.org/assignments/media-types/
 
 inputs:
@@ -49,4 +49,4 @@ steps:
     out:
     - extracted_fasta
 $schemas:
-- https://edamontology.org/EDAM_1.18.owl
+- http://edamontology.org/EDAM_1.18.owl

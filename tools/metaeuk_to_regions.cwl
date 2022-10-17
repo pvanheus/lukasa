@@ -2,7 +2,7 @@
 cwlVersion: v1.0
 class: CommandLineTool
 $namespaces:
-  edam: https://edamontology.org/
+  edam: http://edamontology.org/
   iana: https://www.iana.org/assignments/media-types/
 
 inputs:
@@ -48,4 +48,4 @@ hints:
     packages:
     - package: python
 $schemas:
-- https://edamontology.org/EDAM_1.18.owl
+- http://edamontology.org/EDAM_1.18.owl

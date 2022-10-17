@@ -4,6 +4,6 @@ metaeuk_fasta:
   format: edam:format_1929
 
 $namespaces:
-  edam: https://edamontology.org/
+  edam: http://edamontology.org/
 $schemas:
-  - https://edamontology.org/EDAM_1.18.owl
+  - http://edamontology.org/EDAM_1.18.owl

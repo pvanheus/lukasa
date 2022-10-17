@@ -2,7 +2,7 @@
 cwlVersion: v1.0
 class: CommandLineTool
 $namespaces:
-  edam: https://edamontology.org/
+  edam: http://edamontology.org/
 
 requirements:
   InlineJavascriptRequirement: {}
@@ -87,4 +87,4 @@ hints:
         version:
         - 6.a5d39d9--pl5321hf1761c0_1
 $schemas:
-- https://edamontology.org/EDAM_1.18.owl
+- http://edamontology.org/EDAM_1.18.owl

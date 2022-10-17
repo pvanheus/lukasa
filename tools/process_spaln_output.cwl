@@ -2,7 +2,7 @@
 cwlVersion: v1.0
 class: CommandLineTool
 $namespaces:
-  edam: https://edamontology.org/
+  edam: http://edamontology.org/
 
 inputs:
   script:
@@ -35,4 +35,4 @@ hints:
     packages:
     - package: python
 $schemas:
-- https://edamontology.org/EDAM_1.18.owl
+- http://edamontology.org/EDAM_1.18.owl
