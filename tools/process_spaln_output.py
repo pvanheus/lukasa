@@ -41,6 +41,7 @@ start_position = {}
 end_position = {}
 max_end = 0
 for input_filename in input_filenames:
+    region_name = None
     for line in open(input_filename):
         if line.startswith("##sequence-region"):
             parts = line.split()
@@ -58,10 +59,12 @@ for input_filename in input_filenames:
                 # end is fields[4]
                 max_end = int(fields[4]) + start
     else:
-        if region_name not in end_position or end_position[region_name] < max_end:
-            end_position[region_name] = max_end
-        if region_name not in start_position or start_position[region_name] > start:
-            start_position[region_name] = start
+        if region_name is not None:
+            # if region_name is None it means that we processed an empty file
+            if region_name not in end_position or end_position[region_name] < max_end:
+                end_position[region_name] = max_end
+            if region_name not in start_position or start_position[region_name] > start:
+                start_position[region_name] = start
 
 for annotation_part, locations in sorted(annotation_parts.items(), key=itemgetter(1)):
     # locations is a list of tupes (starting_position, region_name, filename)
