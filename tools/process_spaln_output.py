@@ -67,7 +67,7 @@ for input_filename in input_filenames:
                 start_position[region_name] = start
 
 for annotation_part, locations in sorted(annotation_parts.items(), key=itemgetter(1)):
-    # locations is a list of tupes (starting_position, region_name, filename)
+    # locations is a list of tuples (starting_position, region_name, filename)
     sequence_region_added = False
     for start, region_name, input_filename in sorted(locations, key=itemgetter(0)):
         if not sequence_region_added:
