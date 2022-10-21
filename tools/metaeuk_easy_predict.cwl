@@ -19,7 +19,7 @@ inputs:
       prefix: --metaeuk-eval
       position: 1
   max_intron:
-    type: float?
+    type: int?
     inputBinding:
       prefix: --max-intron
       position: 1
@@ -29,7 +29,7 @@ inputs:
       prefix: --metaeuk-tcov
       position: 1
   min_intron:
-    type: float?
+    type: int?
     inputBinding:
       prefix: --min-intron
       position: 1

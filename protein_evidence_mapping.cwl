@@ -14,6 +14,14 @@ inputs:
   species_table:
     label: "Spaln species table to use (optional)"
     type: string?
+  max_intron:
+    label: "Maximum intron length"
+    type: int?
+    doc: "Maximum intron length, passed to metaeuk"
+  min_intron:
+    label: "Minimum intron length"
+    type: int?
+    doc: "Minimum intron length, passed to metaeuk and spaln"
 outputs:
   spaln_out:
     type: File
@@ -30,6 +38,8 @@ steps:
     in:
       contigs: contigs_fasta
       query: proteins_fasta
+      max_intron: max_intron
+      min_intron: min_intron
     out:
       - output_fasta
   samtools_index_contigs:
@@ -80,6 +90,7 @@ steps:
       genome_fasta: extract_region_pairs/contig_fasta
       query_fasta: extract_region_pairs/protein_fasta
       species: species_table
+      min_intron: min_intron
       output_format:
         default: 0
     out:

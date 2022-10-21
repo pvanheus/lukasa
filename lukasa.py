@@ -9,21 +9,33 @@ import sys
 import tempfile
 from os.path import abspath
 
-template = """contigs_fasta:
-  class: File
-  format: edam:format_1929
-  path: {}
-proteins_fasta:
-  class: File
-  format: edam:format_1929
-  path: {}
-{}
 
-$namespaces:
-  edam: http://edamontology.org/
-$schemas:
-  - http://edamontology.org/EDAM_1.18.owl
-"""
+def build_template(
+    contig_path: str,
+    protein_path: str,
+    species_table: str = "",
+    max_intron: str = "",
+    min_intron: str = "",
+):
+    template = f"""
+    contigs_fasta:
+        class: File
+        format: edam:format_1929
+        path: {contig_path}
+    proteins_fasta:
+        class: File
+        format: edam:format_1929
+        path: {protein_path}
+    {max_intron}
+    {min_intron}
+    {species_table}
+
+    $namespaces:
+    edam: http://edamontology.org/
+    $schemas:
+    - http://edamontology.org/EDAM_1.18.owl
+    """
+    return template
 
 
 def is_fasta(input_filename):
@@ -45,6 +57,8 @@ if __name__ == "__main__":
     )
     parser.add_argument("--output_filename", default="spaln_out.gff3")
     parser.add_argument("--workflow_dir", default=cwl_workflow_dir)
+    parser.add_argument("--max_intron", type=int, help="Maximum intron length")
+    parser.add_argument("--min_intron", type=int, help="Minimum intron length")
     parser.add_argument("contigs_filename", help="File with genomic contigs")
     parser.add_argument("proteins_filename", help="File with proteins to map")
     parser.add_argument("--species_table", help="spaln species table to use")
@@ -53,15 +67,21 @@ if __name__ == "__main__":
         sys.exit("Error: Input files must be in FASTA format")
 
     cwl_input_file = tempfile.NamedTemporaryFile(delete=False, mode="w")
+
+    species_table = max_intron = min_intron = ""
     if args.species_table is not None:
-        species_table_string = "species_table: {}".format(args.species_table)
-    else:
-        species_table_string = ""
+        species_table = "species_table: {}".format(args.species_table)
+    if args.max_intron is not None:
+        max_intron = f"max_intron: {args.max_intron}\n"
+    if args.min_intron is not None:
+        min_intron = f"min_intron: {args.min_intron}\n"
     cwl_input_file.write(
-        template.format(
+        build_template(
             abspath(args.contigs_filename),
             abspath(args.proteins_filename),
-            species_table_string,
+            species_table=species_table,
+            max_intron=max_intron,
+            min_intron=min_intron,
         )
     )
     cwl_input_file.close()

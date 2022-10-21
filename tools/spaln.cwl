@@ -10,6 +10,11 @@ inputs:
     format: edam:format_1929
     inputBinding:
       position: 10
+  min_intron:
+    type: int?
+    inputBinding:
+      prefix: -yL
+      position: 1
   output_format:
     type: int?
     inputBinding:
