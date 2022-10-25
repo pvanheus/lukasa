@@ -1,9 +1,9 @@
-<tool id="lukasa" name="Lukasa" version="@TOOL_VERSION@+galaxy0" python_template_version="3.5">
+<tool id="lukasa" name="Lukasa" version="@TOOL_VERSION@+galaxy0">
     <description>Align protein evidence against genomic contigs using metaeuk and spaln</description>
     <macros>
-        <token name="@TOOL_VERSION@">0.12.0</token>
+        <token name="@TOOL_VERSION@">0.13.0</token>
         <!-- note that this DOI is for lukasa 0.0.6 - update as needed -->
-        <token name="@DOI@">10.5281/zenodo.4084862</token>
+        <token name="@DOI@">10.5281/zenodo.7236571</token>
     </macros>
     <requirements>
         <requirement type="package" version="@TOOL_VERSION@">lukasa</requirement>
@@ -13,12 +13,20 @@
         #if str($species_table).strip() != ''
             --species_table '$species_table'
         #end if
+        #if str($max_intron).strip():
+            --max_intron $max_intron
+        #end if
+        #if str($min_intron).strip():
+            --min_intron $min_intron
+        #end if
             --output_filename '$output_gff' '$contigs_fasta' '$proteins_fasta'
     ]]></command>
     <inputs>
         <param name="contigs_fasta" type="data" format="fasta" label="Genomic contigs (FASTA)"/>
         <param name="proteins_fasta" type="data" format="fasta" label="Proteins (FASTA)"/>
         <param name="species_table" type="text" label="Spaln species table to use (optional)"/>
+        <param argument="--max_intron" type="integer" min="0" label="Max intron length" help="Maximum intron length (passed to metaeuk)" optional="true" />
+        <param argument="--min_intron" type="integer" min="0" label="Min intron length" help="Minimum intron length (passed to metaeuk and spaln)" optional="true" />
     </inputs>
     <outputs>
         <data name="output_gff" format="gff3" label="Map proteins to genome ${on_string}"/>

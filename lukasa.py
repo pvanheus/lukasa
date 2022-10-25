@@ -19,21 +19,21 @@ def build_template(
 ):
     template = f"""
     contigs_fasta:
-        class: File
-        format: edam:format_1929
-        path: {contig_path}
+      class: File
+      format: edam:format_1929
+      path: {contig_path}
     proteins_fasta:
-        class: File
-        format: edam:format_1929
-        path: {protein_path}
+      class: File
+      format: edam:format_1929
+      path: {protein_path}
     {max_intron}
     {min_intron}
     {species_table}
 
     $namespaces:
-    edam: http://edamontology.org/
+      edam: http://edamontology.org/
     $schemas:
-    - http://edamontology.org/EDAM_1.18.owl
+      - http://edamontology.org/EDAM_1.18.owl
     """
     return template
 
@@ -59,6 +59,7 @@ if __name__ == "__main__":
     parser.add_argument("--workflow_dir", default=cwl_workflow_dir)
     parser.add_argument("--max_intron", type=int, help="Maximum intron length")
     parser.add_argument("--min_intron", type=int, help="Minimum intron length")
+    parser.add_argument("--debug", action="store_true", default=False)
     parser.add_argument("contigs_filename", help="File with genomic contigs")
     parser.add_argument("proteins_filename", help="File with proteins to map")
     parser.add_argument("--species_table", help="spaln species table to use")
@@ -87,7 +88,11 @@ if __name__ == "__main__":
     cwl_input_file.close()
 
     workflow_file = "{}/lukasa.cwl".format(args.workflow_dir)
-    cwl_commandline = ["cwltool", "--no-container", workflow_file, cwl_input_file.name]
+    if args.debug:
+        debug = "--debug"
+    else:
+        debug = ""
+    cwl_commandline = ["cwltool", "--no-container", debug, workflow_file, cwl_input_file.name]
     workflow_output_str = subprocess.check_output(cwl_commandline)
 
     os.unlink(cwl_input_file.name)
