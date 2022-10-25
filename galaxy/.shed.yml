@@ -1,0 +1,13 @@
+name: lukasa
+owner: sanbi-uwc
+description: Align protein evidence against genomic contigs using metaeuk and spaln
+long_description: |
+    Lukasa combines MetaEUK and spaln to rapidly identify matches between proteins and genomic contigs and
+    accurately align the proteins to the identified regions. The output is GFF3 format, suitable for use in 
+    eukaryotic genome annotation.
+homepage_url: https://github.com/pvanheus/lukasa
+remote_repository_url: https://github.com/pvanheus/lukasa
+type: unrestricted
+categories:
+    - Sequence Analysis
+    - Genome annotation
