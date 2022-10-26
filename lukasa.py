@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import argparse
 import json
@@ -92,7 +92,10 @@ if __name__ == "__main__":
         debug = "--debug"
     else:
         debug = ""
-    cwl_commandline = ["cwltool", "--no-container", debug, workflow_file, cwl_input_file.name]
+    cwl_commandline = ["cwltool", "--no-container"]
+    if args.debug:
+        cwl_commandline += ['--debug']
+    cwl_commandline += [workflow_file, cwl_input_file.name]
     workflow_output_str = subprocess.check_output(cwl_commandline)
 
     os.unlink(cwl_input_file.name)
