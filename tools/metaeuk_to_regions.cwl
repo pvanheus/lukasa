@@ -39,7 +39,7 @@ outputs:
       glob: proteins*.txt
 
 baseCommand:
-- python
+- python3
 
 hints:
   DockerRequirement:

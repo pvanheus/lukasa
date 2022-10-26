@@ -26,7 +26,7 @@ outputs:
       glob: spaln_out.gff3
 
 baseCommand:
-- python
+- python3
 
 hints:
   DockerRequirement:

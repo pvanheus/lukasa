@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from __future__ import print_function, division
 from operator import itemgetter
 import re
