@@ -1,9 +1,9 @@
 <tool id="lukasa" name="Lukasa" version="@TOOL_VERSION@+galaxy0">
     <description>Align protein evidence against genomic contigs using metaeuk and spaln</description>
     <macros>
-        <token name="@TOOL_VERSION@">0.13.0</token>
-        <!-- note that this DOI is for lukasa 0.0.6 - update as needed -->
-        <token name="@DOI@">10.5281/zenodo.7236571</token>
+        <token name="@TOOL_VERSION@">0.14.1</token>
+        <!-- note that this DOI is for lukasa 0.14.0 - update as needed -->
+        <token name="@DOI@">10.5281/zenodo.7339605</token>
     </macros>
     <requirements>
         <requirement type="package" version="@TOOL_VERSION@">lukasa</requirement>
@@ -19,6 +19,12 @@
         #if str($min_intron).strip():
             --min_intron $min_intron
         #end if
+        #if str($min_coverage).strip()
+            --min_coverage $min_coverage
+        #end if
+        #if str($eval).strip()
+            --eval $eval
+        #end if
             --output_filename '$output_gff' '$contigs_fasta' '$proteins_fasta'
     ]]></command>
     <inputs>
@@ -27,8 +33,10 @@
         <param name="species_table" type="text" label="Spaln species table to use (optional)"/>
         <param argument="--max_intron" type="integer" min="0" label="Max intron length" help="Maximum intron length (passed to metaeuk)" optional="true" />
         <param argument="--min_intron" type="integer" min="0" label="Min intron length" help="Minimum intron length (passed to metaeuk and spaln)" optional="true" />
+        <param argument="--min_coverage" type="float" min="0" max="1" label="Min coverage" help="Minimum proportion of a gene that needs to be covered by exons" optional="true" />
+        <param argument="--eval" type="float" min="0" label="E-val" help="Maximum E-val for MetaEuk" optional="true" />
     </inputs>
-    <outputs>
+     <outputs>
         <data name="output_gff" format="gff3" label="Map proteins to genome ${on_string}"/>
     </outputs>
     <tests>

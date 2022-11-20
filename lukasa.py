@@ -16,6 +16,8 @@ def build_template(
     species_table: str = "",
     max_intron: str = "",
     min_intron: str = "",
+    min_coverage: str = "",
+    eval: str = ""
 ):
     template = f"""
     contigs_fasta:
@@ -28,6 +30,8 @@ def build_template(
       path: {protein_path}
     {max_intron}
     {min_intron}
+    {min_coverage}
+    {eval}
     {species_table}
 
     $namespaces:
@@ -59,6 +63,8 @@ if __name__ == "__main__":
     parser.add_argument("--workflow_dir", default=cwl_workflow_dir)
     parser.add_argument("--max_intron", type=int, help="Maximum intron length")
     parser.add_argument("--min_intron", type=int, help="Minimum intron length")
+    parser.add_argument("--min_coverage", type=float, help="Minimum proportion of a gene that is exons")
+    parser.add_argument("--eval", type=float, help="Maximum E-value for MetaEuk")
     parser.add_argument("--debug", action="store_true", default=False)
     parser.add_argument("contigs_filename", help="File with genomic contigs")
     parser.add_argument("proteins_filename", help="File with proteins to map")
@@ -76,6 +82,10 @@ if __name__ == "__main__":
         max_intron = f"max_intron: {args.max_intron}\n"
     if args.min_intron is not None:
         min_intron = f"min_intron: {args.min_intron}\n"
+    if args.min_coverage is not None:
+        min_coverage = f'min_coverage: "{args.min_coverage}"\n'
+    if args.eval is not None:
+        eval = f'eval: "{args.eval}"\n'
     cwl_input_file.write(
         build_template(
             abspath(args.contigs_filename),
@@ -83,6 +93,8 @@ if __name__ == "__main__":
             species_table=species_table,
             max_intron=max_intron,
             min_intron=min_intron,
+            min_coverage=min_coverage,
+            eval=eval
         )
     )
     cwl_input_file.close()
