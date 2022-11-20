@@ -7,6 +7,8 @@ query:
   path: /home/pvh/Documents/code/Masters/protein_evidence_mapping/data/RefSeq_proteins__Cynoglossus_semilaevis.fasta
   format: edam:format_1929
 output_name: test.fasta
+max_intron: 1000000
+min_coverage: 0.01
 
 $namespaces:
   edam: http://edamontology.org/
