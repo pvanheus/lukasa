@@ -14,6 +14,10 @@ inputs:
   species_table:
     label: "Spaln species table to use (optional)"
     type: string?
+  eval:
+    label: "Maximum e-val for stage 1"
+    type: float?
+    doc: "Maximum e-val to accept for the region_finding step (stage 1)"
   max_intron:
     label: "Maximum intron length"
     type: int?
@@ -22,6 +26,10 @@ inputs:
     label: "Minimum intron length"
     type: int?
     doc: "Minimum intron length, passed to metaeuk and spaln"
+  min_coverage:
+    label: "Minimum coverage"
+    type: float?
+    doc: "Minimum proportion of a gene structure covered by exons"    
 outputs:
   spaln_out:
     type: File
@@ -40,6 +48,8 @@ steps:
       query: proteins_fasta
       max_intron: max_intron
       min_intron: min_intron
+      eval: eval
+      min_coverage: min_coverage
     out:
       - output_fasta
   samtools_index_contigs:
