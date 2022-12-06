@@ -17,7 +17,7 @@ def build_template(
     max_intron: str = "",
     min_intron: str = "",
     min_coverage: str = "",
-    eval: str = ""
+    e_val: str = ""
 ):
     template = f"""
     contigs_fasta:
@@ -31,7 +31,7 @@ def build_template(
     {max_intron}
     {min_intron}
     {min_coverage}
-    {eval}
+    {e_val}
     {species_table}
 
     $namespaces:
@@ -75,28 +75,29 @@ if __name__ == "__main__":
 
     cwl_input_file = tempfile.NamedTemporaryFile(delete=False, mode="w")
 
-    species_table = max_intron = min_intron = ""
+    species_table = max_intron = min_intron = min_coverage = e_val = ""
     if args.species_table is not None:
         species_table = "species_table: {}".format(args.species_table)
     if args.max_intron is not None:
-        max_intron = f"max_intron: {args.max_intron}\n"
+        max_intron = f"max_intron: {args.max_intron}"
     if args.min_intron is not None:
-        min_intron = f"min_intron: {args.min_intron}\n"
+        min_intron = f"min_intron: {args.min_intron}"
     if args.min_coverage is not None:
-        min_coverage = f'min_coverage: "{args.min_coverage}"\n'
+        min_coverage = f"min_coverage: {args.min_coverage}"
     if args.eval is not None:
-        eval = f'eval: "{args.eval}"\n'
-    cwl_input_file.write(
-        build_template(
+        e_val = f"eval: {args.eval}"
+    cwl_input = build_template(
             abspath(args.contigs_filename),
             abspath(args.proteins_filename),
             species_table=species_table,
             max_intron=max_intron,
             min_intron=min_intron,
             min_coverage=min_coverage,
-            eval=eval
+            e_val=e_val
         )
-    )
+    if args.debug:
+        print(cwl_input, file=sys.stderr, end='')
+    cwl_input_file.write(cwl_input)
     cwl_input_file.close()
 
     workflow_file = "{}/lukasa.cwl".format(args.workflow_dir)
