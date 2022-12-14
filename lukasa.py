@@ -65,7 +65,8 @@ if __name__ == "__main__":
     parser.add_argument("--min_intron", type=int, help="Minimum intron length")
     parser.add_argument("--min_coverage", type=float, help="Minimum proportion of a gene that is exons")
     parser.add_argument("--eval", type=float, help="Maximum E-value for MetaEuk")
-    parser.add_argument("--debug", action="store_true", default=False)
+    parser.add_argument("--debug", action="store_true", default=False, help="Enable debug for cwltool")
+    parser.add_argument("--leave_outputs", action="store_true", default=False, help="Leave intermediate outputs")
     parser.add_argument("contigs_filename", help="File with genomic contigs")
     parser.add_argument("proteins_filename", help="File with proteins to map")
     parser.add_argument("--species_table", help="spaln species table to use")
@@ -108,6 +109,8 @@ if __name__ == "__main__":
     cwl_commandline = ["cwltool", "--no-container"]
     if args.debug:
         cwl_commandline += ['--debug']
+    if args.leave_outputs:
+        cwl_commandline += ['--leave-tmpdir', "--copy-outputs"]
     cwl_commandline += [workflow_file, cwl_input_file.name]
     workflow_output_str = subprocess.check_output(cwl_commandline)
 
