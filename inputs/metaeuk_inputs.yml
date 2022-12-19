@@ -9,8 +9,3 @@ query:
 output_name: test.fasta
 max_intron: 1000000
 min_coverage: 0.01
-
-$namespaces:
-  edam: http://edamontology.org/
-$schemas:
-  - http://edamontology.org/EDAM_1.18.owl
