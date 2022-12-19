@@ -11,8 +11,3 @@ metaeuk_output:
   format: edam:format_1929
   path: /home/pvh/Documents/code/Masters/protein_evidence_mapping/data/metaeuk_out.fasta
 species_table: cynosemi
-
-$namespaces:
-  edam: http://edamontology.org/
-$schemas:
-  - http://edamontology.org/EDAM_1.18.owl

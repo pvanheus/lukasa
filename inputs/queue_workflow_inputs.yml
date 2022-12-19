@@ -7,8 +7,3 @@ proteins_fasta:
   format: edam:format_1929
   path: /usr/people/pvh/seabass/RefSeq_proteins__Cynoglossus_semilaevis.fasta
 species_table: cynosemi
-  
-$namespaces:
-  edam: http://edamontology.org/
-$schemas:
-  - http://edamontology.org/EDAM_1.18.owl
